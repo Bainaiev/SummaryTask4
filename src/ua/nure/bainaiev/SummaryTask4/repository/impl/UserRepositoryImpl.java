@@ -2,7 +2,6 @@ package ua.nure.bainaiev.SummaryTask4.repository.impl;
 
 
 import ua.nure.bainaiev.SummaryTask4.annotation.Repository;
-import ua.nure.bainaiev.SummaryTask4.bean.UserBean;
 import ua.nure.bainaiev.SummaryTask4.db.QueryStorage;
 import ua.nure.bainaiev.SummaryTask4.db.holder.ConnectionHolder;
 import ua.nure.bainaiev.SummaryTask4.entity.User;
@@ -11,8 +10,14 @@ import ua.nure.bainaiev.SummaryTask4.entity.enums.Status;
 import ua.nure.bainaiev.SummaryTask4.exception.DataAccessException;
 import ua.nure.bainaiev.SummaryTask4.repository.UserRepository;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Repository
 public class UserRepositoryImpl extends AbstractRepository<User> implements UserRepository {
@@ -248,39 +253,7 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
         }
     }
 
-    public List<UserBean> getAllResult() {
-        String sql = QueryStorage.get(GET_ALL_STUDENT_AND_MARK);
-        try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
-            List<UserBean> allUserBeans = new ArrayList<>();
-            ResultSet rs = ps.executeQuery();
 
-            UserBean bean;
-            while (rs.next()) {
-                bean = extractResult(rs);
-                allUserBeans.add(bean);
-            }
-
-
-            return allUserBeans;
-        } catch (SQLException e) {
-            LOGGER.warn(ERROR_MESSAGE, sql, e);
-            throw new DataAccessException(getMessage(sql), e);
-        }
-    }
-
-
-    private UserBean extractResult(ResultSet rs) throws SQLException {
-        UserBean userBean;
-        userBean = new UserBean();
-        userBean.setFirstName(rs.getString("first_name"));
-        userBean.setLastName(rs.getString("last_name"));
-        String result = rs.getString("result");
-
-        Integer res = Integer.parseInt(result.substring(0, 1));
-        userBean.setResult(res);
-
-        return userBean;
-    }
 
 
 }

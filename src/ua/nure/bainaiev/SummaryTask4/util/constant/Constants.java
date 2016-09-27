@@ -1,8 +1,6 @@
 package ua.nure.bainaiev.SummaryTask4.util.constant;
 
 
-import ua.nure.bainaiev.SummaryTask4.entity.Question;
-
 public final class Constants {
 
     public static final String FALSE = "false";
@@ -132,7 +130,7 @@ public final class Constants {
             public static final String UPDATE_TEST = TEST + "/" + "update";
             public static final String UPDATE_QUESTION = UPDATE_TEST + "/" + "question";
 
-            public static final String GET_ALL_RESULT = ADMIN + "result";
+
 
             private Admin() {
             }
@@ -172,7 +170,7 @@ public final class Constants {
             public static final String ADD_QUESTION = ADMIN_PREFIX + "addQuestion.jsp";
             public static final String EDIT_QUESTIONS = ADMIN_PREFIX + "editQuestion.jsp";
             public static final String EDIT_ANSWERS = ADMIN_PREFIX + "editAnswers.jsp";
-            public static final String RESULT = ADMIN_PREFIX + "result.jsp";
+   
 
             private Admin(){}
         }
